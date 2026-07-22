@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://currency-conv-be.onrender.com/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://currency-converter-backend-3lhz.onrender.com/api';
 
 const selectClasses =
   'appearance-none cursor-pointer bg-[#1a1a24] border border-white/10 rounded-lg pl-3 pr-8 py-2.5 text-sm font-semibold text-white focus:outline-none focus:border-cyan-400/60 focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors';
@@ -209,7 +209,7 @@ export default function CurrencyConverter() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
         <div className="text-center" role="status">
-          <div className="h-12 w-12 mx-auto rounded-full border-2 border-white/10 border-t-cyan-400 animate-spin"></div>
+          <div className="w-12 h-12 mx-auto border-2 rounded-full border-white/10 border-t-cyan-400 animate-spin"></div>
           <p className="mt-5 text-sm font-medium text-slate-400">Loading currencies…</p>
         </div>
       </div>
@@ -219,8 +219,8 @@ export default function CurrencyConverter() {
   if (hasLoadError) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] px-4">
-        <div className="text-center max-w-sm">
-          <p className="text-white font-semibold">Couldn't load currencies</p>
+        <div className="max-w-sm text-center">
+          <p className="font-semibold text-white">Couldn't load currencies</p>
           <p className="mt-2 text-sm text-slate-400">
             Please check that the backend is running, then try again.
           </p>
@@ -240,10 +240,10 @@ export default function CurrencyConverter() {
       <div className="max-w-3xl mx-auto">
         <header className="flex items-center gap-3 mb-8">
           <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"></span>
-          <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-white">
+          <h1 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
             Currency Converter
           </h1>
-          <span className="ml-auto text-xs text-slate-500 hidden sm:block">
+          <span className="hidden ml-auto text-xs text-slate-500 sm:block">
             Real-time &amp; historical rates
           </span>
         </header>
@@ -263,7 +263,7 @@ export default function CurrencyConverter() {
                     id="amount"
                     type="number"
                     inputMode="decimal"
-                    className="flex-1 min-w-0 bg-transparent text-2xl sm:text-3xl font-mono text-white placeholder-slate-600 focus:outline-none"
+                    className="flex-1 min-w-0 font-mono text-2xl text-white bg-transparent sm:text-3xl placeholder-slate-600 focus:outline-none"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
@@ -288,7 +288,7 @@ export default function CurrencyConverter() {
                 </div>
               </div>
 
-              <div className="relative z-10 -my-3 flex justify-center">
+              <div className="relative z-10 flex justify-center -my-3">
                 <button
                   type="button"
                   onClick={swapCurrencies}
@@ -313,7 +313,7 @@ export default function CurrencyConverter() {
                 <div className="flex items-center gap-3 mt-2">
                   <output
                     aria-live="polite"
-                    className="flex-1 min-w-0 truncate text-2xl sm:text-3xl font-mono text-white"
+                    className="flex-1 min-w-0 font-mono text-2xl text-white truncate sm:text-3xl"
                   >
                     {conversionResult !== null ? (
                       conversionResult
@@ -340,7 +340,7 @@ export default function CurrencyConverter() {
               </div>
 
               {quote && (
-                <p className="mt-3 text-center text-xs font-mono text-slate-500">
+                <p className="mt-3 font-mono text-xs text-center text-slate-500">
                   1 {quote.from} = <span className="text-cyan-400">{quote.rate.toFixed(4)}</span>{' '}
                   {quote.to}
                   {quote.historicalDate && ` · on ${quote.historicalDate}`}
@@ -351,7 +351,7 @@ export default function CurrencyConverter() {
                 <label className="flex items-center gap-3 cursor-pointer select-none">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 accent-cyan-400 cursor-pointer"
+                    className="w-4 h-4 cursor-pointer accent-cyan-400"
                     checked={isHistoricalMode}
                     onChange={(e) => setIsHistoricalMode(e.target.checked)}
                   />
@@ -372,7 +372,7 @@ export default function CurrencyConverter() {
               </div>
 
               {conversionError && (
-                <p role="alert" className="mt-4 text-sm text-red-400 text-center">
+                <p role="alert" className="mt-4 text-sm text-center text-red-400">
                   {conversionError}
                 </p>
               )}
@@ -384,7 +384,7 @@ export default function CurrencyConverter() {
               >
                 {isConverting ? (
                   <span className="flex items-center justify-center gap-3">
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24">
                       <circle
                         className="opacity-25"
                         cx="12"
@@ -412,13 +412,13 @@ export default function CurrencyConverter() {
           <section aria-label="Conversion history">
             <div className="bg-[#12121a] border border-white/[0.08] rounded-2xl overflow-hidden">
               <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-white">
+                <h2 className="text-xs font-semibold tracking-wider text-white uppercase">
                   History
                 </h2>
                 {conversionHistory.length > 0 && (
                   <button
                     type="button"
-                    className="text-xs font-medium text-slate-400 hover:text-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 rounded transition-colors"
+                    className="text-xs font-medium transition-colors rounded text-slate-400 hover:text-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                     onClick={clearHistory}
                   >
                     Clear
